@@ -16,10 +16,10 @@ class App extends Component {
     render() {
       return (
         <React.Fragment>
+           <Router>
           <NavigationBar />
           <Jumbotron />
           <Layout>
-            <Router>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/About" component={About} />
@@ -29,8 +29,8 @@ class App extends Component {
                 <Route exact path="/Join" component={Join} />
                 <Route component={Nomatch} />
                </Switch>
-             </Router>
           </Layout>
+          </Router>
         </React.Fragment>
     );
   }  
