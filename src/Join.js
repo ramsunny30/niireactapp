@@ -18,12 +18,21 @@ export const Join=()=> {
                 noValidate
               />
             </div>
+            <div className="firstName">
+              <label htmlFor="firstName">Middle Name</label>
+              <input
+                placeholder="Your First Name"
+                type="text"
+                name="middleName"
+                noValidate
+              />
+            </div>
             <div className="lastName">
               <label htmlFor="lastName">Last Name</label>
               <input
                 placeholder="Your Last Name"
                 type="text"
-                name="firstName"
+                name="lastName"
                 noValidate
               />
             </div>
@@ -45,6 +54,15 @@ export const Join=()=> {
               name="password"
               noValidate
             />
+            </div>
+            <div className="lastName">
+              <label htmlFor="lastName">Phone number</label>
+              <input
+                placeholder="Your Last Name"
+                type="number"
+                name="phonenumber"
+                noValidate
+              />
             </div>
             <div className="createAccount">
               <button type="submit">Signup</button>

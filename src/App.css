@@ -176,3 +176,10 @@ input.error {
     transform: rotate(360deg);
   }
 }
+
+.styles = {
+  button: {
+    margin: 15
+  }
+}
+
