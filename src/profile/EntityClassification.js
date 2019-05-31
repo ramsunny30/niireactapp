@@ -10,26 +10,33 @@ export class EntityClassification extends Component {
         e.preventDefault();
         this.props.nextStep();
     }
+    back = b => {
+        b.preventDefault();
+        this.props.prevStep();
+    }
     render() {
         const { values, handleChange } = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
-                  <AppBar title="Enter User Details" />
-                  <h1>Choose your Account</h1>
+                  <AppBar title="Profile Details" />
+                  <div className="center">
+                  <h2>Classification</h2>
                   <TextField
-                   hintText = "Enter your First Name"
+                   hintText = "Enter your Individual name"
                    floatingLabelText="Individual"
                    onChange={handleChange('Entity_Classification_Individual')}
                    defaultValue={values.Entity_Classification_Individual}
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your First Name"
+                   hintText = "Enter your Company Name"
                    floatingLabelText="Company"
                    onChange={handleChange('Entity_Classification_Individual_Company')}
                    defaultValue={values.Entity_Classification_Individual_Company}
                    />
+                   <br />
+                   <br />
                    <br />
                    <RaisedButton
                    label="continue"
@@ -37,6 +44,7 @@ export class EntityClassification extends Component {
                    style={StyleSheet.button}
                    onClick={this.continue}
                    />
+                   </div>
                </React.Fragment>
              
            </MuiThemeProvider>

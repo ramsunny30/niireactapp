@@ -11,10 +11,7 @@ import { Layout } from './components/Layout';
 import { NavigationBar} from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron';
 import { profileform } from './profile/profileform';
-import { EntityClassification } from './profile/EntityClassification';
-import { Profile } from './Profile';
 
-   
 class App extends Component {
     render() {
       return (

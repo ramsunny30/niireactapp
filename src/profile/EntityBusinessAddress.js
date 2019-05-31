@@ -10,60 +10,76 @@ export class EntityBusinessAddress extends Component {
         e.preventDefault();
         this.props.nextStep();
     }
+    back = b => {
+        b.preventDefault();
+        this.props.prevStep();
+    }
     render() {
         const { values, handleChange } = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
-                  <AppBar title="Enter User Details" />
-                  <h1>Enter Business Address Details</h1>
+                  <AppBar title="Profile Details" />
+                  <div className="center">
+                  <h2>Business Address Details</h2>
                   <TextField
-                   hintText = "Enter your Investor "
-                   floatingLabelText="Investor"
-                   onChange={handleChange('Investor ')}
-                   defaultValue={values.Investor }
+                   hintText = "Enter Address Line 1 "
+                   floatingLabelText="Address Line 1"
+                   onChange={handleChange('BAddress_Line_1')}
+                   defaultValue={values.BAddress_Line_1 }
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Wealth Management Firm"
-                   floatingLabelText="Wealth Management Firm"
-                   onChange={handleChange('Wealth Management Firm')}
-                   defaultValue={values.Wealth_Management_Firm}
+                   hintText = "Enter Address Line 2 "
+                   floatingLabelText="Address Line 2"
+                   onChange={handleChange('BAddress_Line_2')}
+                   defaultValue={values.BAddress_Line_2 }
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Wealth Service Provider"
-                   floatingLabelText="Service Provider"
-                   onChange={handleChange('Service Provider')}
-                   defaultValue={values.Service_Provider}
+                   hintText = "Enter your City Name"
+                   floatingLabelText="City Name"
+                   onChange={handleChange('Bcity')}
+                   defaultValue={values.Bcity}
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Asset Manager"
-                   floatingLabelText="Asset Manager"
-                   onChange={handleChange('Asset Manager')}
-                   defaultValue={values.Asset_Manager}
+                   hintText = "Enter your State,Province or Region"
+                   floatingLabelText="State ,Provience or Region"
+                   onChange={handleChange('BState')}
+                   defaultValue={values.Bstate}
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Others"
-                   floatingLabelText="Others"
-                   onChange={handleChange('Others')}
-                   defaultValue={values.Others}
+                   hintText = "Enter your ZipCode"
+                   floatingLabelText="Zipcode"
+                   onChange={handleChange('Bzipcode')}
+                   defaultValue={values.Bzipcode}
                    />
-                   <br/>
+                   <br />
+                   <TextField
+                   hintText = "Enter your Country"
+                   floatingLabelText="Country Name"
+                   onChange={handleChange('Bcountry')}
+                   defaultValue={values.Bcountry}
+                   />
+                   <br />
+                   <br />
+                   <br />
                    <RaisedButton
                    label="continue"
                    primary={true}
                    style={StyleSheet.button}
                    onClick={this.continue}
                    />
+                   <div className="divider" />
                     <RaisedButton
                    label="Back"
                    primary={false}
                    style={StyleSheet.button}
                    onClick={this.back}
                    />
+                   </div>
                </React.Fragment>
              
            </MuiThemeProvider>

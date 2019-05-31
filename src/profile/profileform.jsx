@@ -13,7 +13,8 @@ export class profileform extends Component {
    state = {
        step: 1,
        Entity_Classification_Individual:'',
-       Entity_Classification_Individual_Company: '' 
+       Entity_Classification_Individual_Company: ''
+       
    }
   // proceed to next step
    nextStep = () => {

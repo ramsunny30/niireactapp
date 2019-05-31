@@ -183,3 +183,39 @@ input.error {
   }
 }
 
+label img {
+  height: 100px;
+  width: 100px;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+checkboxb {
+  background-size: cover;
+  color: #efefef;
+  height: 300px;
+  position: relative;
+  z-index: -2;
+}
+checkboxp {
+  background-color: #000;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.divider{
+  width:20px;
+  height:auto;
+  display:inline-block;
+}

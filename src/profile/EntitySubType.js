@@ -10,13 +10,18 @@ export class EntitySubType extends Component {
         e.preventDefault();
         this.props.nextStep();
     }
+    back = b => {
+        b.preventDefault();
+        this.props.prevStep();
+    }
     render() {
         const { values, handleChange } = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
-                  <AppBar title="Enter User Details" />
-                  <h1>Choose your Sub Type</h1>
+                  <AppBar title="Profile Details" />
+                  <div className="center">
+                  <h2>Sub Type</h2>
                   <TextField
                    hintText = "Enter your Investor "
                    floatingLabelText="Investor"
@@ -51,19 +56,23 @@ export class EntitySubType extends Component {
                    onChange={handleChange('Others')}
                    defaultValue={values.Others}
                    />
-                   <br/>
+                   <br />
+                   <br />
+                   <br />
                    <RaisedButton
                    label="continue"
                    primary={true}
                    style={StyleSheet.button}
                    onClick={this.continue}
                    />
+                   <div className="divider" />
                     <RaisedButton
                    label="Back"
                    primary={false}
                    style={StyleSheet.button}
                    onClick={this.back}
                    />
+                   </div>
                </React.Fragment>
              
            </MuiThemeProvider>

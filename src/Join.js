@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import "./App.css";
-import FacebookLogin from 'react-facebook-login';
 import TwitterLogin from 'react-twitter-auth';
 
 export const Join=()=> {

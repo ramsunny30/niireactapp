@@ -10,60 +10,48 @@ export class EntityIntrestedParty extends Component {
         e.preventDefault();
         this.props.nextStep();
     }
+    back = b => {
+        b.preventDefault();
+        this.props.prevStep();
+    }
     render() {
         const { values, handleChange } = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
-                  <AppBar title="Enter User Details" />
-                  <h1>Enter Intrested Party Details</h1>
+                  <AppBar title="Profile Details" />
+                  <div className="center">
+                  <h2>Intrested Party Details</h2>
                   <TextField
-                   hintText = "Enter your Investor "
-                   floatingLabelText="Investor"
-                   onChange={handleChange('Investor ')}
-                   defaultValue={values.Investor }
+                   hintText = "Enter Nominated Entity Name"
+                   floatingLabelText="Nominated Entity Name"
+                   onChange={handleChange('Nentity_name')}
+                   defaultValue={values.Nentity_name }
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Wealth Management Firm"
-                   floatingLabelText="Wealth Management Firm"
-                   onChange={handleChange('Wealth Management Firm')}
-                   defaultValue={values.Wealth_Management_Firm}
+                   hintText = "Enter Nominated Entity Email"
+                   floatingLabelText="Nominated Entity Email"
+                   onChange={handleChange('Nentity_email')}
+                   defaultValue={values.Nentity_email }
                    />
                    <br />
-                   <TextField
-                   hintText = "Enter your Wealth Service Provider"
-                   floatingLabelText="Service Provider"
-                   onChange={handleChange('Service Provider')}
-                   defaultValue={values.Service_Provider}
-                   />
                    <br />
-                   <TextField
-                   hintText = "Enter your Asset Manager"
-                   floatingLabelText="Asset Manager"
-                   onChange={handleChange('Asset Manager')}
-                   defaultValue={values.Asset_Manager}
-                   />
                    <br />
-                   <TextField
-                   hintText = "Enter your Others"
-                   floatingLabelText="Others"
-                   onChange={handleChange('Others')}
-                   defaultValue={values.Others}
-                   />
-                   <br/>
                    <RaisedButton
                    label="continue"
                    primary={true}
                    style={StyleSheet.button}
                    onClick={this.continue}
                    />
+                   <div className="divider" />
                     <RaisedButton
                    label="Back"
                    primary={false}
                    style={StyleSheet.button}
                    onClick={this.back}
                    />
+                   </div>
                </React.Fragment>
              
            </MuiThemeProvider>

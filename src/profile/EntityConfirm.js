@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TextField from 'material-ui/TextField';
 import { List,ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
@@ -12,12 +11,17 @@ export class EntityConfirm extends Component {
         //PROCESS FORM send to API
         this.props.nextStep();
     }
+    back = b => {
+        b.preventDefault();
+        this.props.prevStep();
+    }
     render() {
         const { values: {Entity_Classification_Individual, Entity_Classification_Individual_Company}} = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
                   <AppBar title="Confirm User Data" />
+                  <div className="center">
                   <List>
                       <ListItem
                       primaryText="Entity Classification Individual"
@@ -28,19 +32,23 @@ export class EntityConfirm extends Component {
                       secondaryText={ Entity_Classification_Individual_Company }
                       />
                   </List>
-                   <br/>
+                   <br />
+                   <br />
+                   <br />
                    <RaisedButton
                    label="Confirm & continue"
                    primary={true}
                    style={StyleSheet.button}
                    onClick={this.continue}
                    />
+                   <div className="divider" />
                     <RaisedButton
                    label="Back"
                    primary={false}
                    style={StyleSheet.button}
                    onClick={this.back}
                    />
+                   </div>
                </React.Fragment>
              
            </MuiThemeProvider>

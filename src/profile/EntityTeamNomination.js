@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
-import {List, ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 
@@ -11,60 +10,62 @@ export class EntityTeamNomination extends Component {
         e.preventDefault();
         this.props.nextStep();
     }
+    back = b => {
+        b.preventDefault();
+        this.props.prevStep();
+    }
     render() {
         const { values, handleChange } = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
-                  <AppBar title="Enter User Details" />
-                  <h1>Enter Team Nomination Details</h1>
+                  <AppBar title="Profile Details" />
+                  <div className="center">
+                  <h2>Team Nomination Details</h2>
                   <TextField
-                   hintText = "Enter your Investor "
-                   floatingLabelText="Investor"
-                   onChange={handleChange('Investor ')}
-                   defaultValue={values.Investor }
+                   hintText = "Enter Nominated Entity Name"
+                   floatingLabelText="Nominated Entity Name"
+                   onChange={handleChange('IPNentity_name')}
+                   defaultValue={values.IPNentity_name }
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Wealth Management Firm"
-                   floatingLabelText="Wealth Management Firm"
-                   onChange={handleChange('Wealth Management Firm')}
-                   defaultValue={values.Wealth_Management_Firm}
+                   hintText = "Enter Nominated Entity Type"
+                   floatingLabelText="Nominated Entity Email"
+                   onChange={handleChange('IPNentity_type')}
+                   defaultValue={values.IPNentity_type }
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Wealth Service Provider"
-                   floatingLabelText="Service Provider"
-                   onChange={handleChange('Service Provider')}
-                   defaultValue={values.Service_Provider}
+                   hintText = "Enter Nominated Entity Sub Type"
+                   floatingLabelText="Nominated Entity Sub Type"
+                   onChange={handleChange('IPNentity_subtype')}
+                   defaultValue={values.IPNentity_subtype}
                    />
                    <br />
                    <TextField
-                   hintText = "Enter your Asset Manager"
-                   floatingLabelText="Asset Manager"
-                   onChange={handleChange('Asset Manager')}
-                   defaultValue={values.Asset_Manager}
+                   hintText = "Enter Nominated Entity Email"
+                   floatingLabelText="Nominated Entity Email"
+                   onChange={handleChange('IPNentity_email')}
+                   defaultValue={values.IPNentity_email }
                    />
                    <br />
-                   <TextField
-                   hintText = "Enter your Others"
-                   floatingLabelText="Others"
-                   onChange={handleChange('Others')}
-                   defaultValue={values.Others}
-                   />
-                   <br/>
+                   <br />
+                   <br />
                    <RaisedButton
                    label="continue"
                    primary={true}
                    style={StyleSheet.button}
                    onClick={this.continue}
                    />
+                   <div className="divider" />
                     <RaisedButton
                    label="Back"
                    primary={false}
                    style={StyleSheet.button}
                    onClick={this.back}
                    />
+                   </div>
                </React.Fragment>
              
            </MuiThemeProvider>
