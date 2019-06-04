@@ -11,6 +11,7 @@ import { Layout } from './components/Layout';
 import { NavigationBar} from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron';
 import { profileform } from './profile/profileform';
+import { Events } from './Events';
 
 class App extends Component {
     render() {
@@ -26,6 +27,7 @@ class App extends Component {
                 <Route exact path="/Contact" component={Contact} />
                 <Route exact path="/Blog" component={Blog} />
                 <Route exact path="/Profile" component={profileform} />
+                <Route exact path="/Events" component={Events} />
                 <Route exact path="/Login" component={Login} />
                 <Route exact path="/Join" component={Join} />
                 <Route component={Nomatch} />
