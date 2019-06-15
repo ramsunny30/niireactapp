@@ -4,7 +4,7 @@ import EventListAttendee from './EventListAttendee'
 
 class EventListItem extends Component {
     render() {
-      const {event} = this.props;
+      const {event, selectEvent } = this.props;
         return (
             <div>
                        <Segment.Group>
@@ -13,9 +13,9 @@ class EventListItem extends Component {
                               <Item>
                                 <Item.Image size="tiny" circular src={event.hostPhotoURL} />
                                 <Item.Content>
-                                  <Item.Header as="a">{event.title}</Item.Header>
+                                  <Item.Header>{event.title}</Item.Header>
                                   <Item.Description>
-                                    Hosted by <a>{event.hostedBy}</a>
+                                    Hosted by  {event.hostedBy} 
                                   </Item.Description>
                                 </Item.Content>
                               </Item>
@@ -23,20 +23,22 @@ class EventListItem extends Component {
                           </Segment>
                           <Segment>
                             <span>
-                              <Icon name="clock" /> {event.fromdate} | <Icon name="clock" /> {event.todate}  |
+                              <Icon name="clock" /> {event.fromdate} | 
+                              <Icon name="clock" /> {event.todate}  |
                               <Icon name="marker" /> {event.venue}
                             </span>
                           </Segment>
                           <Segment secondary>
                             <List horizontal>
-                              {event.attendees.map((attendee) => (
+                              {event.attendees && event.attendees.map((attendee) => (
                                 <EventListAttendee key={attendee.id} attendee={attendee} />
                               ))}
                             </List>
                           </Segment>
                           <Segment clearing>
                             <span>{event.description}</span>
-                            <Button as="a" color="teal" floated="right" content="View" />
+                            <Button onClick = { () => selectEvent(event) }
+                            as="a" color="teal" floated="right" content="View" />
                           </Segment>
                         </Segment.Group>
             </div>

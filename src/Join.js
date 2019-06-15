@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from 'react-dom';
+import React from "react";
+//import ReactDOM from 'react-dom';
 import "./App.css";
 import TwitterLogin from 'react-twitter-auth';
 

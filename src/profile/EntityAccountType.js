@@ -4,22 +4,41 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import InvestorType from './InvestorType';
+import ServiceProviderType from './ServiceProviderType';
+import WealthManagerType from './WealthManagerType';
+import AssetManagerType from './AssetManagerType';
+import OtherType from './OtherType';
+
+//import { Button } from 'semantic-ui-react';
+//import EventForm from '../features/event/EventForm/EventForm';
+
               
 // App.js
 //import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 export class EntityAccountType extends Component {
-    
   state = {
        Investor: false,
        Wealth_Management_Firm: false,
        Service_Provider: false,
        Asset_Manager: false,
-       Others: false 
+       Others: false,
+       isOpens: false
    }
-    continue = e => {
-        e.preventDefault();
-        this.props.nextStep();
-    }
+   
+  
+
+   handleCreateForm = () => {
+    this.setState({
+     isOpens: true,
+    })
+  }
+   continue = e => {
+    e.preventDefault();
+     // const isLoggedIn = this.state.Investor;
+      this.props.nextStep();
+   }
+    
 
     back = b => {
         b.preventDefault();
@@ -29,6 +48,7 @@ export class EntityAccountType extends Component {
         this.setState(prevState => ({
             Investor: !prevState.Investor,
         }));
+
     }
     
       toggleChangeWealth_Management_Firm = () => {
@@ -56,7 +76,7 @@ export class EntityAccountType extends Component {
       }
     
     render() {
-        const { values, handleChange } = this.props;
+        //const { state , values, handleChange } = this.props;
         return (
            <MuiThemeProvider>
                <React.Fragment>
@@ -75,10 +95,17 @@ export class EntityAccountType extends Component {
                 onChange={this.toggleChangeInvestor}
                 className="form-check-input"
               />
-              <img src={require('../assets/Investor_img.jpg')}/>
+              <img src={require('../assets/Investor_img.jpg')} alt="Investor" />
               Investor
             </label>
             <br />
+            {
+                      this.state.Investor && (
+                      <InvestorType
+                     
+                      />
+
+                      )}
           </div>
           <div className="form-check">
             <label className="form-check-label">
@@ -87,9 +114,17 @@ export class EntityAccountType extends Component {
                 onChange={this.toggleChangeWealth_Management_Firm}
                 className="form-check-input"
               />
-              <img src={require('../assets/Wealth_Management_Firm_img.jpg')} />
+              <img src={require('../assets/Wealth_Management_Firm_img.jpg')}  alt="wealth_Management_Firm"/>
               Wealth Management Firm
             </label>
+            <br />
+            {
+                      this.state.Wealth_Management_Firm && (
+                      <WealthManagerType
+                     
+                      />
+
+                      )}
           </div>
           <br />
           <div className="form-check">
@@ -99,9 +134,17 @@ export class EntityAccountType extends Component {
                 onChange={this.toggleChangeService_Provider}
                 className="form-check-input"
               />
-             <img src={require('../assets/Service_Provider_img.jpg')} />
+             <img src={require('../assets/Service_Provider_img.jpg')}  alt= "service Provider" />
               Service Provider
             </label>
+            <br />
+            {
+                      this.state.Service_Provider && (
+                      <ServiceProviderType
+                     
+                      />
+
+                      )}
           </div>
           <br />
           <div className="form-check">
@@ -111,9 +154,17 @@ export class EntityAccountType extends Component {
                 onChange={this.toggleChangeAsset_Manager}
                 className="form-check-input"
               />
-              <img src={require('../assets/Asset_Manager_img.jpg')} />
+              <img src={require('../assets/Asset_Manager_img.jpg')} alt="Asset_Manager"/>
               Asset Manager
             </label>
+            <br />
+            {
+                      this.state.Asset_Manager && (
+                      <AssetManagerType
+                     
+                      />
+
+                      )}
           </div>
           <br />
           <div className="form-check">
@@ -123,15 +174,25 @@ export class EntityAccountType extends Component {
                 onChange={this.toggleChangeOthers}
                 className="form-check-input"
               />
-              <img src={require('../assets/Other_img.jpg')} />
+              <img src={require('../assets/Other_img.jpg')} alt= "other" />
               Others
             </label>
+            {
+                      this.state.Others && (
+                      <OtherType
+                     
+                      />
+
+                      )}
+
           </div>
         </form>
       </div>
         <br />
         <br />
         <br />
+
+                      
                    <div className="center">
                    <RaisedButton
                    label="continue"
@@ -148,6 +209,13 @@ export class EntityAccountType extends Component {
                    onClick={this.back}
                    />
                    </div>
+               
+                   {/* <Button onClick={this.handleCreateForm}
+                       positive 
+                       content="Create Event" />
+                       */}
+                     
+                   
                </React.Fragment>
              
            </MuiThemeProvider>

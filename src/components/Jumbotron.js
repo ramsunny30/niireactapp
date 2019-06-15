@@ -1,5 +1,6 @@
 import React from 'react';
-import { Jumbotron as Jumbo, container} from 'react-bootstrap';
+// import { Jumbotron as Jumbo, container} from 'react-bootstrap';
+import { Jumbotron as Jumbo} from 'react-bootstrap';
 import styled from 'styled-components';
 import HomePageImage from '../assets/HomePageImage.jpg';
 
@@ -33,11 +34,11 @@ export const Jumbotron = () => (
 <Styles>
     <Jumbo fluid className="jumbo">
     <div className="overlay"></div>
-    <container>
+    {/* <container> */}
        <div className="h1">
        <h1>Where World Meets Investors</h1>
        </div>
-    </container>
+    {/* </container> */}
     </Jumbo>
 </Styles>
 )

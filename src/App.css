@@ -219,3 +219,10 @@ checkboxp {
   height:auto;
   display:inline-block;
 }
+
+form-check {
+  background-size: cover;
+  color: #efefef;
+  height: 300px;
+  float: right;
+}

@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 
 
 export class EntitySubType extends Component {
+    
     continue = e => {
         e.preventDefault();
         this.props.nextStep();
