@@ -7,15 +7,20 @@ import { Blog } from './Blog';
 import { Login } from './Login';
 import { Join } from './Join';
 import { Nomatch } from './Nomatch';
-import { Layout } from './components/Layout';
-import { NavigationBar} from './components/NavigationBar';
-import { Jumbotron } from './components/Jumbotron';
-import { profileform } from './profile/profileform';
+import { Layout } from '../components/Layout';
+import { NavigationBar} from '../components/NavigationBar';
+import { Jumbotron } from '../components/Jumbotron';
+import { profileform } from '../profile/profileform';
 import { Events } from './Events';
+import TestComponenet from '../features/TestArea/TestComponenet';
+import {Provider} from 'react-redux';
+import {configureStore} from '../store/configureStore';
 
+const store= configureStore();
 class App extends Component {
     render() {
       return (
+        <Provider store={store}>
         <React.Fragment>
            <Router>
           <NavigationBar />
@@ -30,11 +35,13 @@ class App extends Component {
                 <Route exact path="/Events" component={Events} />
                 <Route exact path="/Login" component={Login} />
                 <Route exact path="/Join" component={Join} />
+                <Route exact path="/Test" component={TestComponenet} />
                 <Route component={Nomatch} />
                </Switch>
           </Layout>
           </Router>
         </React.Fragment>
+        </Provider>
     );
   }  
 }

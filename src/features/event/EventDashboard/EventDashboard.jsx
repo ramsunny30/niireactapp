@@ -1,73 +1,27 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Grid,Button } from 'semantic-ui-react/dist/commonjs/'
-import cuid from 'cuid'
+import cuid from 'cuid';
+import {connect} from 'react-redux';
 //import Investor_Img from '../assets/Investor_img.jpg'
 import EventList from '../EventList/EventList'
 import EventForm from '../EventForm/EventForm'
+import {createEvent,deleteEvent,updateEvent} from '../eventActions'
+ 
+const mapState = (state) => ({
+  events: state.events
+})
 
-const eventsFromDashboard = [
-  {
-    id: '1',
-    title: 'Investor Meeting',
-    fromdate: '2019-06-27',
-    todate: '2019-06-27',
-    category: 'culture',
-    description:
-      'First stage meetings – Business plan, financial information, background information of the investment funds',
-    city: 'London, UK',
-    venue: "New york City hall",
-    hostedBy: 'Bob',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-    attendees: [
-      {
-        id: 'a',
-        name: 'Bob',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-      },
-      {
-        id: 'c',
-        name: 'Sarah',
-        photoURL: 'https://randomuser.me/api/portraits/women/3.jpg'
-      }
-    ]
-  },
-  {
-    id: '2',
-    title: 'Growth oppurtunites in bitcoin vinvestment fund',
-    fromdate: '2019-06-28T',
-    todate:'2019-06-28',
-    category: 'drinks',
-    description:
-      'VInvestments will be hosting an investor meeting with people intrested in investing the fund 216, Our investmenet manager Matt Ellis will be conducting this  as part of fund introduction seminar. The presentations coveres a discussion of fund strategy, fund details, ROI as well as an introduction of the new market oppurtunities.',
-    city: 'London, UK',
-    venue: 'Webex',
-    hostedBy: 'Tom',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
-    attendees: [
-      {
-        id: 'b',
-        name: 'Tom',
-        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
-      },
-      {
-        id: 'a',
-        name: 'Bob',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-      },
-      {
-        id: 'c',
-        name: 'Sarah',
-        photoURL: 'https://randomuser.me/api/portraits/women/3.jpg'
-      }
-    ]
-  }
-]
+const actions = {
+  createEvent,
+  deleteEvent,
+  updateEvent
+}
 
 class EventDashboard extends Component {
  
    state = {
-      events: eventsFromDashboard,
+      //events: eventsFromDashboard,
       isOpen: false,
       selectedEvent: null
     };
@@ -84,7 +38,7 @@ class EventDashboard extends Component {
   //   }));
   // };
 
-  handleCreateForm = () => {
+  handleCreateFormOpen = () => {
     this.setState({
       isOpen: true,
       selectedEvent: null
@@ -96,6 +50,8 @@ handleFormCancel = () =>{
         isOpen: false
       })
   }
+
+
 
   handleCreateEvent = newEvent => {
     newEvent.id = cuid();
@@ -115,12 +71,32 @@ handleFormCancel = () =>{
     this.setState({
       selectedEvent: event,
       isOpen: true
-    })
-  }
+    });
+  };
 
-  
+
+  handleUpdateEvent = (updatedEvent) => {
+    this.setState(({events}) => ({
+      events: events.map(event => {
+      if (event.id === updatedEvent.id) {
+        return {...updatedEvent}
+      } else {
+        return event
+      }
+    }),
+    isOpen: false,
+    selectedEvent: null
+  }))
+}
+    
+handleDeleteEvent = (id) => {
+  this.setState(({events}) => ({
+   events:events.filter(e=> e.id !== id)
+  }))
+}
     render() {
-        const { events, isOpen, selectedEvent } = this.state;
+        const { isOpen, selectedEvent } = this.state;
+        const {events} = this.props;
         return (
             <MuiThemeProvider>
                <React.Fragment>      
@@ -131,7 +107,10 @@ handleFormCancel = () =>{
                <br />
                     <Grid>
                       <Grid.Column width={10}>
-                      <EventList events={events} selectEvent = {this.handleSelectEvent} />
+                      <EventList events={events} 
+                      selectEvent = {this.handleSelectEvent} 
+                      deleteEvent = { this.handleDeleteEvent}
+                      />
                       </Grid.Column>
                       <Grid.Column width={6}>
                       <Button onClick={this.handleCreateFormOpen}
@@ -140,6 +119,8 @@ handleFormCancel = () =>{
                       {
                         isOpen && (
                       <EventForm 
+                      key={selectedEvent ? selectedEvent.id : 0}
+                      updateEvent={this.handleUpdateEvent}
                       selectedEvent={selectedEvent}
                       createEvent={this.handleCreateEvent}
                       cancelFormOpen={this.handleFormCancel}
@@ -154,4 +135,4 @@ handleFormCancel = () =>{
         )
     }
 }
-export default EventDashboard
+export default connect (mapState,actions)(EventDashboard);

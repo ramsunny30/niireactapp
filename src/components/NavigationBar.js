@@ -25,6 +25,7 @@ a, .navbar-brand, .navbar-nav .nav-link {
          <Nav.Item><Nav.Link href="/Blog">Blog</Nav.Link></Nav.Item>
          <Nav.Item><Nav.Link href="/Profile">Profile</Nav.Link></Nav.Item>
          <Nav.Item><Nav.Link href="/Events">Events</Nav.Link></Nav.Item>
+         <Nav.Item><Nav.Link href="/Test">Test</Nav.Link></Nav.Item>
          <Navbar.Toggle aria-controls="basic-navbar-nav" />
          <Navbar.Collapse id="basic-navbar-nav">
          {/* <Nav className="ml-auto"> */}

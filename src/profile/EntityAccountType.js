@@ -19,7 +19,7 @@ import OtherType from './OtherType';
 export class EntityAccountType extends Component {
   state = {
        Investor: false,
-       Wealth_Management_Firm: false,
+       Wealth_Manager: false,
        Service_Provider: false,
        Asset_Manager: false,
        Others: false,
@@ -51,9 +51,9 @@ export class EntityAccountType extends Component {
 
     }
     
-      toggleChangeWealth_Management_Firm = () => {
+      toggleChangeWealth_Manager = () => {
         this.setState(prevState => ({
-            Wealth_Management_Firm: !prevState.Wealth_Management_Firm,
+            Wealth_Manager: !prevState.Wealth_Manager,
         }));
       }
     
@@ -110,16 +110,16 @@ export class EntityAccountType extends Component {
           <div className="form-check">
             <label className="form-check-label">
               <input type="checkbox"
-                checked={this.state.Wealth_Management_Firm}
-                onChange={this.toggleChangeWealth_Management_Firm}
+                checked={this.state.Wealth_Manager}
+                onChange={this.toggleChangeWealth_Manager}
                 className="form-check-input"
               />
-              <img src={require('../assets/Wealth_Management_Firm_img.jpg')}  alt="wealth_Management_Firm"/>
-              Wealth Management Firm
+              <img src={require('../assets/Wealth_Management_Firm_img.jpg')}  alt="wealth_Managemer"/>
+              Wealth Manager
             </label>
             <br />
             {
-                      this.state.Wealth_Management_Firm && (
+                      this.state.Wealth_Manager && (
                       <WealthManagerType
                      
                       />
