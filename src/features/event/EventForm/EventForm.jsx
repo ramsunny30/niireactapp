@@ -1,17 +1,28 @@
 import React, { Component } from 'react'
+
+import {connect} from 'react-redux';
 import { Segment, Form, Button } from 'semantic-ui-react'
+
+const mapState = (state, ownProps) => {
+  const eventId = ownProps.match.params.id;
+  let event = {
+    title: '',
+    date: '',
+    city: '',
+    venuw: '',
+    hostedBy: ''
+  }
+  if (eventId && state.events.length >0) {
+    event = state.events.filter(event => event.id === eventId)[0]
+  }
+  return {
+    event
+  }
+}
 
 class EventForm extends Component {
 
-  state = {
-    title: '', 
-    fromdate: '',
-    todate: '',
-    city: '',
-    venue: '',
-    hostedBy: '',
-    description: ''
-  };
+  state = {...this.props.event};
 
   // onFormSubmit = (evt) => {
   //   evt.preventDefault();
@@ -51,7 +62,6 @@ class EventForm extends Component {
   //   })
   // }
     render() {
-      const { cancelFormOpen } = this.props;
       const { title, fromdate, todate, city, venue, hostedBy, description} = this.state;
         return (
                   <Segment>
@@ -122,12 +132,12 @@ class EventForm extends Component {
                       <Button positive type="submit">
                         Submit
                       </Button>
-                      <Button onClick= {cancelFormOpen} type="button">Cancel</Button>
+                      <Button onClick= {this.props.history.goBack} type="button">Cancel</Button>
                     </Form>
                   </Segment>
         )
     }
 }
-export default EventForm
+export default connect(mapState)(EventForm)
 
 

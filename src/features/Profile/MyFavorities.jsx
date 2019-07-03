@@ -1,14 +1,8 @@
 import React, { Component,Fragment } from 'react'
-import { Grid, Menu, Segment,Divider,Image } from 'semantic-ui-react'
+import { Segment,Divider,Image } from 'semantic-ui-react'
 
  class MyFavorities extends Component {
-  state = { activeItem: 'bio' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
-    const { activeItem } = this.state
-
     return (
       <Fragment>
         <Image src={require('../../app/assets/Women1.jpg')} size='small' rounded />
@@ -16,7 +10,7 @@ import { Grid, Menu, Segment,Divider,Image } from 'semantic-ui-react'
         <Segment>
         <h2>My Profile</h2> 
         </Segment>
-        <Segment color='#0077B5'>
+        <Segment color='blue'>
         <h2>Name</h2> 
         </Segment>
         <Segment>

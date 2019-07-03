@@ -4,7 +4,6 @@ import EventListItem from '../EventList/EventListItem'
 class EventList extends Component {
     render() {
         const {
-            events, 
             selectEvent,
             deleteEvent
         } = this.props;

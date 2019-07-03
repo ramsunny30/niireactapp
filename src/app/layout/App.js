@@ -22,9 +22,11 @@ class App extends Component {
     return (
       <Fragment>
         <Route exact path='/' component={HomePage} />
+        <Route exact path='/About' component={About} />
+        <Route exact path='/Contact' component={Contact} />
         
         <Route
-          path='/(.+)'
+           path='/(.+)'
           render={() => (
             <Fragment>
               <NavBar />
