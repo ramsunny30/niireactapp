@@ -1,20 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'semantic-ui-css/semantic.min.css';
+import { Provider } from 'react-redux';
+//import 'semantic-ui-css/semantic.min.css';
 import './index.css';
-import App from './app/App';
+import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
+import { configureStore } from './app/store/configureStore';
+import ScrollToTop from './app/common/util/ScrollToTop';
 
-//ReactDOM.render(<App />, document.getElementById('root'));
-
+const store = configureStore();
 const rootEl = document.getElementById('root');
 
 let render = () => {
-    ReactDOM.render(<App />,rootEl)
-}
+
+    ReactDOM.render(
+        <Provider store={store}>
+        <BrowserRouter>
+        <ScrollToTop>
+        <App />
+        </ScrollToTop>
+        </BrowserRouter>
+         </Provider>
+          ,
+          rootEl
+          );
+};
 
 if (module.hot) {
-    module.hot.accept('./app/App', () => {
+    module.hot.accept('./app/layout/App.js', () => {
         setTimeout(render);
     })
 }
