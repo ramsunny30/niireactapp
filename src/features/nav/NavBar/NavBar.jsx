@@ -36,24 +36,7 @@ class NavBar extends Component {
             <Fragment>
               <Menu.Item as={NavLink} exact to='/events' name='My DashBoard' />
               <Menu.Item as={NavLink} to='/test' name='Test' />
-              {/* <div align="Justify" class="ui fluid category search"  >
-             <div align="bottom" class="ui icon input">
-              <input class="prompt" type="text" placeholder="Search Investor or Company.. etc" style={{minWidth:"30em"}} />
-              <i class="search icon"></i>
-              </div>
-              </div> */}
-              {/* <select class="ui compact selection dropdown fluid" style={{maxWidth:"5em"}}>
-             <option value = "all">All</option>
-             <option selected="" value="articles">Investors</option>
-             <option value="products">Asset Managers</option>
-            </select>
-            <div class="ui action input">
-            <input type="text" placeholder="Search..." style={{minWidth:"20em"}} />
-              <button class="ui icon button">
-               <i class="search icon"></i>
-             </button>
-             </div> */}
-              
+             
                 <Dropdown
                   button
                   basic
@@ -64,7 +47,7 @@ class NavBar extends Component {
              
               <Input
                 icon='search'
-                iconPosition='right'
+                iconPosition='left'
                 placeholder='Search...' style={{minWidth:"20em"}}
               />
             </Fragment>

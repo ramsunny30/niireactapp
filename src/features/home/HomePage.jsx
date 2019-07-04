@@ -26,7 +26,7 @@ const HomePage = ({history}) => {
           />
           NII
         </Header>
-        <Button size='huge' color='Strong blue' inverted onClick={() => history.push('/Login')}>
+        <Button size='huge' color='blue' inverted onClick={() => history.push('/Login')}>
           Get started
           <Icon name='right arrow'/>
         </Button>

@@ -11,8 +11,8 @@ import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage'
 import SettingsDashboard from '../../features/user/Settings/SettingsDashboard';
 import EventForm from '../../features/event/EventForm/EventForm';
 import TestComponent from '../../features/TestArea/TestComponenet';
-import Profile from '../../features/Profile/Profile';
-import MyFavorities from '../../features/Profile/MyFavorities';
+import Profile from '../../features/user/Profile/Profile';
+import MyFavorities from '../../features/user/Profile/MyFavorities';
 import About from '../layout/About';
 import Contact from '../layout/Contact';
 
@@ -42,10 +42,7 @@ class App extends Component {
                   <Route path='/Profile' component={Profile} />
                   <Route path='/profile/:id' component={UserDetailedPage} />
                   <Route path='/settings' component={SettingsDashboard} />
-                  <Route
-                    path={['/createEvent', '/manage/:id']}
-                    component={EventForm}
-                  />
+                  <Route path={['/createEvent', '/manage/:id']} component={EventForm} />
                   <Route path='/test' component={TestComponent} />
                 </Switch>
               </Container>

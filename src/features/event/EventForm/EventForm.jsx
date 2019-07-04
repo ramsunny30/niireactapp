@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import {connect} from 'react-redux';
 import { Segment, Form, Button } from 'semantic-ui-react'
 
@@ -7,9 +6,9 @@ const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
   let event = {
     title: '',
-    date: '',
+    todate: '',
     city: '',
-    venuw: '',
+    venue: '',
     hostedBy: ''
   }
   if (eventId && state.events.length >0) {
@@ -23,12 +22,6 @@ const mapState = (state, ownProps) => {
 class EventForm extends Component {
 
   state = {...this.props.event};
-
-  // onFormSubmit = (evt) => {
-  //   evt.preventDefault();
-  //   this.props.createEvent(this.state);
-  // };
-
 
   componentDidMount() {
     if (this.props.selectedEvent !== null) {
@@ -54,13 +47,7 @@ class EventForm extends Component {
    });
  };
 
-  // onInputChange = (evt) => {
-  //   const newEvent = this.state.event;
-  //   newEvent[evt.target.name] = evt.target.value
-  //   this.setState({
-  //     event: newEvent
-  //   })
-  // }
+  
     render() {
       const { title, fromdate, todate, city, venue, hostedBy, description} = this.state;
         return (
@@ -138,6 +125,6 @@ class EventForm extends Component {
         )
     }
 }
-export default connect(mapState)(EventForm)
+export default connect(mapState)(EventForm);
 
 

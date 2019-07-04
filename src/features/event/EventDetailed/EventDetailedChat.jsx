@@ -24,7 +24,7 @@ const EventDetailedChat = () => {
                      <Comment.Metadata>
                        <div>Today at 5:42PM</div>
                      </Comment.Metadata>
-                     <Comment.Text>How artistic!</Comment.Text>
+                     <Comment.Text>Waiting for the event date</Comment.Text>
                      <Comment.Actions>
                        <Comment.Action>Reply</Comment.Action>
                      </Comment.Actions>
@@ -40,7 +40,7 @@ const EventDetailedChat = () => {
                      </Comment.Metadata>
                      <Comment.Text>
                        <p>
-                         This has been very useful for my research. Thanks as well!
+                         Amazed to see event happening at Near my place
                        </p>
                      </Comment.Text>
                      <Comment.Actions>
@@ -55,7 +55,7 @@ const EventDetailedChat = () => {
                          <Comment.Metadata>
                            <div>Just now</div>
                          </Comment.Metadata>
-                         <Comment.Text>Elliot you are always so right :)</Comment.Text>
+                         <Comment.Text>Elliot you are always welcome and hopeing to meet you at the event</Comment.Text>
                          <Comment.Actions>
                            <Comment.Action>Reply</Comment.Action>
                          </Comment.Actions>
@@ -71,16 +71,17 @@ const EventDetailedChat = () => {
                      <Comment.Metadata>
                        <div>5 days ago</div>
                      </Comment.Metadata>
-                     <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
+                     <Comment.Text>Are there any similar kind of events planned in California</Comment.Text>
                      <Comment.Actions>
                        <Comment.Action>Reply</Comment.Action>
+                      
                      </Comment.Actions>
                    </Comment.Content>
                  </Comment>
+                 <br/>
        
                  <Form>
                    <Form.TextArea />
-                   <br />
                    <br />
                    <Button
                      content="Add Reply"

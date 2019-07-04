@@ -5,7 +5,7 @@ import { Segment,Divider,Image } from 'semantic-ui-react'
   render() {
     return (
       <Fragment>
-        <Image src={require('../../app/assets/Women1.jpg')} size='small' rounded />
+        <Image src={require('../../../app/assets/Women1.jpg')} size='small' rounded />
         <Segment.Group horizontal>
         <Segment>
         <h2>My Profile</h2> 

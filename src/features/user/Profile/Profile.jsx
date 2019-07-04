@@ -11,7 +11,7 @@ import { Grid, Menu, Segment,Divider,Image } from 'semantic-ui-react'
 
     return (
       <Fragment>
-        <Image  src={require('../../app/assets/Women1.jpg')} size='small'/>
+        <Image  src={require('../../../app/assets/Women1.jpg')} size='small'/>
         <Segment.Group horizontal>
         <Segment>
         <h2>My Profile</h2> 
