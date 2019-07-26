@@ -1,9 +1,20 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import { Menu} from "semantic-ui-react";
 import { NavLink,withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
 import { Dropdown, Input } from "semantic-ui-react";
+import {openModal} from '../../modals/modalActions';
+import {logout} from '../../auth/authActions';
+
+const actions ={
+  openModal,
+  logout
+};
+const mapstate = (state) => ({
+  auth: state.auth
+});
 
 const options = [
   { key: "page", text: "Investor", value: "Investor" },
@@ -12,18 +23,23 @@ const options = [
 ];
 
 class NavBar extends Component {
-  state = {
-    authenticated: true
-  };
 
-  handleSignIn = () => this.setState({ authenticated: true });
+  
+     
+  handleSignIn = () => { this.props.openModal('LoginModal')};
+
+
+  handleRegister = () => { this.props.openModal('RegisterModal')};
+
+
   handleSignOut = () => {
-    this.setState({ authenticated: false });
+    this.props.logout()
     this.props.history.push("/");
   };
 
   render() {
-    const { authenticated } = this.state;
+    const { auth } = this.props;
+    const authenticated =auth.authenticated;
     return (
       <Fragment>
         <Menu inverted fixed='top'>
@@ -32,11 +48,14 @@ class NavBar extends Component {
             <img src={require("../../../app/assets/user.png")} alt='logo' />
             NII
           </Menu.Item>
-          {authenticated ? (
+          {authenticated && (
             <Fragment>
-              <Menu.Item as={NavLink} exact to='/events' name='My DashBoard' />
+              <Menu.Item as={NavLink} exact to='/userDashboard' name='User DashBoard' />
               <Menu.Item as={NavLink} to='/test' name='Test' />
-             
+              <Menu.Item as={NavLink} to='/Blog' name='Blog' />
+              <Menu.Item as={NavLink} to='/CalenderApp' name='Calender' />
+              <Menu.Item as={NavLink} to='/News' name='News' />
+              <Menu.Item as={NavLink} to='/Events' name='Events' />
                 <Dropdown
                   button
                   basic
@@ -51,24 +70,19 @@ class NavBar extends Component {
                 placeholder='Search...' style={{minWidth:"20em"}}
               />
             </Fragment>
-          ) : (
-            <Fragment>
-              <Menu.Item as={NavLink} to='/About' name='About Us' />
-              <Menu.Item as={NavLink} to='/Contact' name='Contact Us' />
-            </Fragment>
-          )}
+          ) 
+         
+          }
 
           {authenticated ? (
-            <SignedInMenu signOut={this.handleSignOut} />
+            <SignedInMenu signOut={this.handleSignOut} currentuser={auth.currentuser} />
           ) : (
-            <SignedOutMenu signIn={this.handleSignIn} />
+            <SignedOutMenu signIn={this.handleSignIn} register={this.handleRegister}/>
           )}
-
-          {/* </Container> */}
         </Menu>
       </Fragment>
     );
   }
 }
 
-export default withRouter(NavBar);
+export default withRouter(connect(mapstate, actions)(NavBar));

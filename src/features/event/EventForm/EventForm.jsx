@@ -1,130 +1,180 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux';
-import { Segment, Form, Button } from 'semantic-ui-react'
+/*global google*/
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { reduxForm, Field } from "redux-form";
+import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+import {composeValidators, combineValidators, isRequired, hasLengthGreaterThan} from 'revalidate'
+import { Header, Grid, Segment, Form, Button } from "semantic-ui-react";
+import { createEvent, updateEvent } from "../eventActions";
+import cuid from "cuid";
+import TextInput from "../../../app/common/form/TextInput";
+import TextArea from "../../../app/common/form/TextArea";
+import SelectInput from "../../../app/common/form/SelectInput";
+import DateInput from "../../../app/common/form/DateInput";
+import PlaceInput from "../../../app/common/form/PlaceInput";
+
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
-  let event = {
-    title: '',
-    todate: '',
-    city: '',
-    venue: '',
-    hostedBy: ''
-  }
-  if (eventId && state.events.length >0) {
-    event = state.events.filter(event => event.id === eventId)[0]
+  let event = {};
+  if (eventId && state.events.length > 0) {
+    event = state.events.filter(event => event.id === eventId)[0];
   }
   return {
-    event
-  }
-}
+    initialValues: event
+  };
+};
+
+const actions = { createEvent, updateEvent };
+
+const validate = combineValidators({
+  title: isRequired({message: 'The event name'}),
+  category: isRequired({message: 'The category'}),
+  description: composeValidators(
+    isRequired({message: 'Please enter a description'}),
+    hasLengthGreaterThan(4)({message: 'Description needs to be at least 5 characters'})
+  )(),
+  city: isRequired('city name'),
+  venue: isRequired('venue address'),
+  todate: isRequired('todate')
+
+})
+
+const category = [
+  { key: "Online", text: "Online", value: "In-Person" },
+  { key: "In-Person", text: "In-Person", value: "Online" }
+];
 
 class EventForm extends Component {
-
-  state = {...this.props.event};
-
-  componentDidMount() {
-    if (this.props.selectedEvent !== null) {
-      this.setState({
-        ...this.props.selectedEvent
-      })
-    }
+  state = {
+    cityLatLng: {},
+    venueLatLng: {}
   }
-      
-  handleFormSubmit = evt => {
-    evt.preventDefault();
-    if (this.state.id) {
-      this.props.updateEvent(this.state);
+  onFormSubmit = values => {
+    values.venueLatLng = this.state.venueLatLng;
+    if (this.props.initialValues.id) {
+      this.props.updateEvent(values);
+      this.props.history.push(`/events/${this.props.initialValues.id}`);
     } else {
-      this.props.createEvent(this.state);
+      const newEvent = {
+        ...values,
+        id: cuid(),
+        hostPhotoURL: "../../../app/assets/user.png",
+        hostedBy: 'Bob'
+      };
+      this.props.createEvent(newEvent);
+      this.props.history.push(`/events/{newEvent.id}`);
     }
-   //console.log(this.state);
   };
 
- handleInputChange = ({target: {name, value}}) => {
-   this.setState({
-     [name]: value
-   });
- };
+  handleCitySelect = selectedCity => {
+    geocodeByAddress(selectedCity)
+      .then(results => getLatLng(results[0]))
+      .then(latlng => {
+        this.setState({
+          cityLatLng: latlng
+        })
+      })
+      .then(() => {
+        this.props.change('city', selectedCity)
+      })
+  }
 
-  
-    render() {
-      const { title, fromdate, todate, city, venue, hostedBy, description} = this.state;
-        return (
-                  <Segment>
-                    <Form onSubmit={this.handleFormSubmit} autoComplete='off'>
-                      <Form.Field>
-                        <label>Event Title</label>
-                        <input 
-                          name='title'
-                          onChange={this.handleInputChange}
-                          value={title}
-                          placeholder="Event Title" />
-                      </Form.Field>
-                      <br />
-                      <Form.Field>
-                        <label>Event From Date</label>
-                        <input 
-                        name='fromdate'
-                        onChange={this.handleInputChange}
-                        value={fromdate}
-                        type="date" placeholder="Event From Date" />
-                      </Form.Field>
-                      <Form.Field>
-                        <label>Event To Date</label>
-                        <input  
-                        name='todate'
-                        onChange={this.handleInputChange}
-                        value={todate}
-                        type="date" 
-                        placeholder="Event To Date" />
-                      </Form.Field>
-                      <br />
-                      <Form.Field>
-                        <label>City</label>
-                        <input 
-                        name='city'
-                        onChange={this.handleInputChange}
-                        value={city}
-                        placeholder="City event is taking place" />
-                      </Form.Field>
-                      <br />
-                      <Form.Field>
-                        <label>Venue</label>
-                        <input 
-                        name='venue'
-                        onChange={this.handleInputChange}
-                        value={venue}
-                        placeholder="Enter the Venue of the event where organized" />
-                      </Form.Field>
-                      <br />
-                      <Form.Field>
-                        <label>Hosted By</label>
-                        <input 
-                        name='hostedBy'
-                        onChange={this.handleInputChange}
-                        value={hostedBy}
-                        placeholder="Enter the name of person hosting" />
-                      </Form.Field>
-                      <br />
-                      <Form.Field>
-                        <label>Description of the event</label>
-                        <input 
-                         name='description'
-                         onChange={this.handleInputChange}
-                         value={description}
-                        placeholder="Enter the Description of the event" />
-                      </Form.Field>
-                      <br />
-                      <Button positive type="submit">
-                        Submit
-                      </Button>
-                      <Button onClick= {this.props.history.goBack} type="button">Cancel</Button>
-                    </Form>
-                  </Segment>
-        )
-    }
+  handleVenueSelect = selectedVenue => {
+    geocodeByAddress(selectedVenue)
+      .then(results => getLatLng(results[0]))
+      .then(latlng => {
+        this.setState({
+          venueLatLng: latlng
+        })
+      })
+      .then(() => {
+        this.props.change('venue', selectedVenue)
+      })
+  }
+
+  render() {
+    const {history, initialValues, invalid, submitting, pristine} = this.props;
+    return (
+      <Grid>
+        <Grid.Column width={10}>
+          <Segment>
+            <Header sub color='teal' content='Event Details' />
+            <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)} autoComplete='off'>
+              <Field
+                name='title'
+                component={TextInput}
+                placeholder='Give your event a name'
+              />
+              <Field
+                name='category'
+                component={SelectInput}
+                options={category}
+                placeholder='Type of Event'
+              />
+              <Field
+                name='description'
+                component={TextArea}
+                placeholder='Tell us about your event'
+              />
+
+              <Header sub color='teal' content='Event Location Details' />
+              <Field
+                name='city'
+                component={PlaceInput}
+                options={{types: ['(cities)']}}
+                onSelect={this.handleCitySelect}
+                placeholder='Event city'
+              />
+              <Field
+                name='venue'
+                component={PlaceInput}
+                options={{
+                  location: new google.maps.LatLng(this.state.cityLatLng),
+                  radius: 1000,
+                  types: ['establishment']
+                }}
+                onSelect={this.handleVenueSelect}
+                placeholder='Event venue'
+              />
+              <Header sub color='teal' content='Time of Event' />
+              <Field
+                name='fromdate'
+                component={DateInput}
+                dateFormat='dd LLL yyyy h:mm a'
+                showTimeSelect
+                timeFormat='HH:mm'
+                placeholder='Event From Date'
+              />
+              <Field
+                name='todate'
+                component={DateInput}
+                dateFormat='dd LLL yyyy h:mm a'
+                showTimeSelect
+                timeFormat='HH:mm'
+                placeholder='Event to Date'
+              />
+
+              <br />
+              <Button disabled={invalid || submitting || pristine} positive type='submit'>
+                Submit
+              </Button>
+              <Button onClick={initialValues.id 
+              ? () =>  history.push(`/events/${initialValues.id}`)
+              : () =>  history.push(`/events`)
+            } 
+            type='button'>
+                Cancel
+              </Button>
+            </Form>
+          </Segment>
+        </Grid.Column>
+      </Grid>
+    );
+  }
 }
-export default connect(mapState)(EventForm);
-
+export default connect(
+  mapState,
+  actions
+)(reduxForm({ form: 'eventForm', validate })(EventForm));
 

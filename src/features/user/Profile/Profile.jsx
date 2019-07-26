@@ -1,10 +1,12 @@
 import React, { Component,Fragment } from 'react'
-import { Grid, Menu, Segment,Divider,Image } from 'semantic-ui-react'
+import { Grid, Menu, Segment,Divider,Image} from 'semantic-ui-react';
 
  class Profile extends Component {
   state = { activeItem: 'bio' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+  }
 
   render() {
     const { activeItem } = this.state
@@ -31,7 +33,7 @@ import { Grid, Menu, Segment,Divider,Image } from 'semantic-ui-react'
       <Grid>
         <Grid.Column width={4}>
           <Menu fluid vertical tabular>
-            <Menu.Item name='bio' active={activeItem === 'bio'} onClick={this.handleItemClick} />
+            <Menu.Item name='Investment' active={activeItem === 'bio'} onClick={this.handleItemClick} />
             <Menu.Item name='pics' active={activeItem === 'pics'} onClick={this.handleItemClick} />
             <Menu.Item
               name='companies'

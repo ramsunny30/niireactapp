@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import { incrementCounter, decrementCounter } from "./testActions";
 import { Button,Breadcrumb } from "semantic-ui-react";
+import TestPlaceInput from '../TestArea/TestPlaceInput';
 
 const mapState = state => ({
   data: state.test.data
@@ -55,6 +56,10 @@ class TestComponenet extends Component {
             <Breadcrumb.Divider />
             <Breadcrumb.Section active>T-Shirt</Breadcrumb.Section>
           </Breadcrumb>
+
+        <br />
+        <br />
+        <TestPlaceInput />
         </div>
       </Fragment>
     );

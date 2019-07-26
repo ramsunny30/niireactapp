@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import EventDashboard from '../../features/event/EventDashboard/EventDashboard';
+import userDashboard from '../../features/userDashboard/userDashboard';
 import NavBar from '../../features/nav/NavBar/NavBar';
 import { Container } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
@@ -15,16 +15,22 @@ import Profile from '../../features/user/Profile/Profile';
 import MyFavorities from '../../features/user/Profile/MyFavorities';
 import About from '../layout/About';
 import Contact from '../layout/Contact';
+import ModalManager from '../../features/modals/ModalManager';
+import CalenderApp from './CalenderApp';
+import News from './News';
+import Blog from './Blog';
+import EventDashboard from '../../features/event/EventDashboard/EventDashboard';
+
 
 
 class App extends Component {
   render() {
     return (
       <Fragment>
+        <ModalManager />
         <Route exact path='/' component={HomePage} />
         <Route exact path='/About' component={About} />
-        <Route exact path='/Contact' component={Contact} />
-        
+        <Route exact path='/Contact' component={Contact} />   
         <Route
            path='/(.+)'
           render={() => (
@@ -32,8 +38,7 @@ class App extends Component {
               <NavBar />
               <Container className='main'>
                 <Switch key={this.props.location.key}>
-                <Route exact path='/About' component={About} />
-                <Route exact path='/Contact' component={Contact} />
+                  <Route exact path='/userDashboard' component={userDashboard} />
                   <Route exact path='/Events' component={EventDashboard} />
                   <Route path='/events/:id' component={EventDetailedPage} />
                   <Route path='/people' component={PeopleDashboard} />
@@ -44,6 +49,10 @@ class App extends Component {
                   <Route path='/settings' component={SettingsDashboard} />
                   <Route path={['/createEvent', '/manage/:id']} component={EventForm} />
                   <Route path='/test' component={TestComponent} />
+                  <Route path='/CalenderApp' component={CalenderApp} />
+                  <Route path='/News' component={News} />
+                  <Route path='/Blog' component={Blog} />
+
                 </Switch>
               </Container>
             </Fragment>
