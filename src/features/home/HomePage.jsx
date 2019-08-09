@@ -1,4 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment,container } from 'react';
+import './../../app/assets/styles.css'
+import Carrousel from '../../app/layout/components/Carrousel';
+import Footer from  './Footer';
+
+
 import {
   Segment,
   Container,
@@ -8,13 +13,19 @@ import {
   Icon
 } from 'semantic-ui-react';
 import NavBar from '../../features/nav/NavBar/NavBar';
-import Jumbotron from '../../app/layout/components/Jumbotron'
+// import Jumbotron from '../../app/layout/components/Jumbotron'
 
 const HomePage = ({history}) => {
   return (
     <Fragment>
     <NavBar />
-    <Jumbotron />
+    {/*<Jumbotron /> */}
+    {/* <div style={{position:'relative'}}> */}
+    <container style={{position:'relative'}}>
+    
+     <Carrousel/>
+   
+    </container>
     <Segment inverted textAlign='center' vertical className='masthead'>
       <Container text>
         <Header as='h1' >
@@ -103,8 +114,9 @@ const HomePage = ({history}) => {
           />
        Conduct Participate in Events
         </Header>
-
+        
         </Container>
+        <Footer />
     </Segment>
     </Fragment>
   );

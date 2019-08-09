@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react/dist/commonjs/";
 import { Button } from "semantic-ui-react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import EventList from "../event/EventList/EventList";
 import { createEvent, deleteEvent, updateEvent } from "../event/eventActions";
 import LoadingComponent from "../../app/layout/LoadingComponent";
+import { firestoreConnect } from "react-redux-firebase";
 
 const mapState = state => ({
   events: state.events,
@@ -24,7 +24,7 @@ class userDashboard extends Component {
     this.props.deleteEvent(id);
   };
   render() {
-    const { events, loading } = this.props;
+    const { loading } = this.props;
     if (loading) return <LoadingComponent />
     return (
       <React.Fragment>
@@ -109,11 +109,6 @@ class userDashboard extends Component {
                 </div>
               </div>
             </div>
-
-            <EventList
-              events={events}
-              deleteEvent={this.handleDeleteEvent}
-            />
           </Grid.Column>
           <Grid.Column width={5}>
             <div class='ui card'>
@@ -175,7 +170,12 @@ class userDashboard extends Component {
     );
   }
 }
+// export default connect(
+//   mapState,
+//   actions
+// )(userDashboard);
+
 export default connect(
   mapState,
   actions
-)(userDashboard);
+)(firestoreConnect([{ collection: "events" }])(userDashboard));
