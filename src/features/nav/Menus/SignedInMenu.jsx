@@ -3,12 +3,12 @@ import { Menu, Image, Dropdown} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
-const SignedInMenu = ({signOut,currentUser}) => {
+const SignedInMenu = ({signOut,auth}) => {
  
   return (
     <Menu.Item position='left'  style={{ marginLeft: '3.0em' }}>
       <Image avatar spaced='right' src={require('../../../app/assets/Women1.jpg')} />
-      <Dropdown pointing='top left' text={currentUser}>
+      <Dropdown pointing='top left' text={auth.email}>
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to='/MyFavorities' text='My Favorities' icon='user' />
           <Dropdown.Item as={Link} to='/Profile' text='My Profile' icon='user' />

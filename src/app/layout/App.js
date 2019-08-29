@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import './../assets/styles.css'
 import { Route, Switch } from 'react-router-dom';
 import userDashboard from '../../features/userDashboard/userDashboard';
 import NavBar from '../../features/nav/NavBar/NavBar';
