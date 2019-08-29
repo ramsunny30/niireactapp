@@ -1,12 +1,12 @@
 import React from 'react'
-import {Form} from 'semantic-ui-react'
+import {Form, Radio} from 'semantic-ui-react'
 
 const RadioInput = ({input, width, type, label}) => {
     return (
         <Form.Field>
             <div className='ui radio'>
-                <input {...input} type={type}/>{' '}
-                <label>{label}</label>
+                {/* <input {...input} type={type}/>{' '} */}
+                <Radio label>{label}</Radio>
             </div>
         </Form.Field>
     )
